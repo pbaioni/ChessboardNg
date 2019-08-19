@@ -36,7 +36,8 @@
 						],
 						"scripts": [
 							"node_modules/jquery/dist/jquery.min.js",
-							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js"
+							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",
+							"node_modules/chess.js/chess.min.js"
 						]
 					},
 					"configurations": {
@@ -110,7 +111,8 @@
 						],
 						"scripts": [
 							"node_modules/jquery/dist/jquery.min.js",
-							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js"
+							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",
+							"node_modules/chess.js/chess.min.js"
 						]
 					}
 				},
