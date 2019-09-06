@@ -136,7 +136,7 @@ export class ChessboardComponent implements OnInit {
     start() {
         
         
-        this.board.position('start', true);
+        this.board.start(true);
 
         this.game = new Chess();
     }
