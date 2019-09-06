@@ -24,8 +24,7 @@ export class ChessboardComponent implements OnInit {
             snapbackSpeed: 100,
             snapSpeed: 100,
             pieceTheme: 'img/chesspieces/wikipedia/{piece}.png',
-            showNotation: false,
-            onDragStart: this.onDragStart,
+            showNotation: false
         }
 
         this.board = new ChessBoard( 'board', config );

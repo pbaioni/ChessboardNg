@@ -26,18 +26,18 @@
 							"src/assets",
 							{
 								"glob": "**/*",
-								"input": "node_modules/@chrisoakman/chessboardjs/img",
+								"input": "src/assets/img",
 								"output": "./img"
 							}
 						],
 						"styles": [
 							"src/styles.css",
-							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.css"
+							"src/assets/css/chessboard-1.0.0.css"
 						],
 						"scripts": [
 							"node_modules/jquery/dist/jquery.min.js",
-							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",
-							"node_modules/chess.js/chess.min.js"
+							"src/assets/js/chessboard-1.0.0.js",
+							"src/assets/js/chess.js"
 						]
 					},
 					"configurations": {
@@ -101,18 +101,18 @@
 							"src/assets",
 							{
 								"glob": "**/*",
-								"input": "node_modules/@chrisoakman/chessboardjs/img",
+								"input": "src/assets/img",
 								"output": "./img"
 							}
 						],
 						"styles": [
 							"src/styles.css",
-							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.css"
+							"src/assets/css/chessboard-1.0.0.min.css"
 						],
 						"scripts": [
 							"node_modules/jquery/dist/jquery.min.js",
-							"node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",
-							"node_modules/chess.js/chess.min.js"
+							"src/assets/js/chessboard-1.0.0.js",
+							"src/assets/js/chess.js"
 						]
 					}
 				},
