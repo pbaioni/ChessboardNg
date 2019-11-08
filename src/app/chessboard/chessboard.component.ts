@@ -54,7 +54,7 @@ export class ChessboardComponent implements OnInit {
 
           this.boardService.getBoard().subscribe(
             (response: any) => {
-              console.log(response.content);
+              console.log('Welcome message: ' + response.content);
             }
           ); 
 
@@ -64,6 +64,8 @@ export class ChessboardComponent implements OnInit {
     onDragStart( source, piece, position, orientation ) {
         // do not pick up pieces if the game is over
         if ( this.game.game_over() ) return false
+
+        if(this.only_pawns) return false
 
         // only pick up pieces for the side to move
         if ( ( this.game.turn() === 'w' && piece.search( /^b/ ) !== -1 ) ||
@@ -151,12 +153,13 @@ export class ChessboardComponent implements OnInit {
             this.only_pawns = false;
             this.board.position(this.game.fen());
         } else{
-            this.only_pawns = true;
             this.boardService.getOnlyPawns(this.game.fen()).subscribe(
                 (response: any) => {
-                    this.board.position(response.fenOnlyPawns);
+                    console.log('Only pawns fen: ' + response.content)
+                    this.board.position(response.content);
                 }
               ); 
+              this.only_pawns = true;
         }
         
 
