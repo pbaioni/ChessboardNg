@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 declare const ChessBoard: any;
 declare const Chess: any;
 
@@ -13,10 +13,11 @@ export class ChessboardComponent implements OnInit {
     game: any;
     config: any;
 
-    constructor() { }
+    constructor() {  }
 
 
     ngOnInit() {
+        
         this.config = {
             orientation: 'white',
             draggable: true,
@@ -146,6 +147,12 @@ export class ChessboardComponent implements OnInit {
         this.board.clear();
 
         this.game = new Chess();
+    }
+
+    onlyPawns() {
+        
+        console.log('only pawns');
+
     }
 
 }
