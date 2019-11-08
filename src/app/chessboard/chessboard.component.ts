@@ -12,6 +12,7 @@ export class ChessboardComponent implements OnInit {
     board: any;
     game: any;
     config: any;
+    only_pawns: boolean;
 
     constructor() {  }
 
@@ -45,6 +46,8 @@ export class ChessboardComponent implements OnInit {
         this.game = new Chess();
 
         this.updateStatus();
+
+        this.only_pawns = false;
 
     }
 
@@ -87,71 +90,59 @@ export class ChessboardComponent implements OnInit {
 
     updateStatus() {
         var status = ''
-
         var moveColor = 'White'
         if ( this.game.turn() === 'b' ) {
             moveColor = 'Black'
         }
-
         // checkmate?
         if ( this.game.in_checkmate() ) {
             status = 'Game over, ' + moveColor + ' is in checkmate.'
         }
-
         // draw?
         else if ( this.game.in_draw() ) {
             status = 'Game over, drawn position'
         }
-
         // game still on
         else {
             status = moveColor + ' to move'
-
             // check?
             if ( this.game.in_check() ) {
                 status += ', ' + moveColor + ' is in check'
             }
         }
-
         console.log( status );
     }
 
     onMouseoverSquare( square, piece ) {
-
         //nothing to do
-
     }
-
     onMouseoutSquare( square, piece ) {
-
         //nothing to do
-
     }
-
     onMoveEnd() {
-
         //nothing to do
-
     }
     
     start() {
-        
-        
         this.board.start(true);
-
         this.game = new Chess();
     }
     
     clear() {
-        
         this.board.clear();
-
         this.game = new Chess();
     }
 
     onlyPawns() {
         
-        console.log('only pawns');
+        if(this.only_pawns){
+            this.only_pawns = false;
+            console.log('Showing all pieces');
+        } else{
+            this.only_pawns = true;
+            console.log('Showing only pawns');
+        }
+        
 
     }
 
