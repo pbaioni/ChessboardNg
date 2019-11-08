@@ -1,4 +1,7 @@
 import { Component, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BoardService } from '../services/board.service';
+
 declare const ChessBoard: any;
 declare const Chess: any;
 
@@ -14,7 +17,7 @@ export class ChessboardComponent implements OnInit {
     config: any;
     only_pawns: boolean;
 
-    constructor() {  }
+    constructor(private boardService: BoardService) {  }
 
 
     ngOnInit() {
@@ -49,6 +52,13 @@ export class ChessboardComponent implements OnInit {
 
         this.only_pawns = false;
 
+          this.boardService.getBoard().subscribe(
+            (response: any) => {
+              console.log(response.content);
+            }
+          ); 
+
+
     }
 
     onDragStart( source, piece, position, orientation ) {
@@ -68,7 +78,7 @@ export class ChessboardComponent implements OnInit {
         let move = this.game.move( {
             from: source,
             to: target,
-            promotion: 'q' // NOTE: always promote to a queen for example simplicity
+            promotion: 'q' // NOTE: always promotes to a queen
         } )
 
         // illegal move
@@ -126,21 +136,27 @@ export class ChessboardComponent implements OnInit {
     start() {
         this.board.start(true);
         this.game = new Chess();
+        this.only_pawns = false;
     }
     
     clear() {
         this.board.clear();
         this.game = new Chess();
+        this.only_pawns = false;
     }
 
     onlyPawns() {
         
         if(this.only_pawns){
             this.only_pawns = false;
-            console.log('Showing all pieces');
+            this.board.position(this.game.fen());
         } else{
             this.only_pawns = true;
-            console.log('Showing only pawns');
+            this.boardService.getOnlyPawns(this.game.fen()).subscribe(
+                (response: any) => {
+                    this.board.position(response.fenOnlyPawns);
+                }
+              ); 
         }
         
 
