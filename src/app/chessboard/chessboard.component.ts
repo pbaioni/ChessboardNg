@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BoardService } from '../services/board.service';
+import { AnalysisService } from '../services/analysis.service';
+import { PositionAnalysis } from '../model/analysis.model';
 
 declare const ChessBoard: any;
 declare const Chess: any;
@@ -16,8 +17,9 @@ export class ChessboardComponent implements OnInit {
     game: any;
     config: any;
     only_pawns: boolean;
+    positionAnalisys: PositionAnalysis;
 
-    constructor(private boardService: BoardService) {  }
+    constructor(private analysisService: AnalysisService) {  }
 
 
     ngOnInit() {
@@ -52,7 +54,7 @@ export class ChessboardComponent implements OnInit {
 
         this.only_pawns = false;
 
-          this.boardService.getBoard().subscribe(
+          this.analysisService.getBoard().subscribe(
             (response: any) => {
               console.log('Welcome message: ' + response.content);
             }
@@ -141,19 +143,25 @@ export class ChessboardComponent implements OnInit {
         this.only_pawns = false;
     }
     
-    clear() {
-        this.board.clear();
-        this.game = new Chess();
-        this.only_pawns = false;
+    analysis() {
+        this.analysisService.getAnalysis(this.game.fen()).subscribe(
+            (response: PositionAnalysis) => {
+                this.positionAnalisys = response;
+                console.log('Short FEN: ' + this.positionAnalisys.shortFen);
+                console.log('FEN: ' + this.positionAnalisys.fen);
+                console.log('Only pawns FEN: ' + this.positionAnalisys.onlyPawnsFen);
+                console.log('Evaluation: ' + this.positionAnalisys.evaluation);
+            }
+          ); 
+
     }
 
     onlyPawns() {
-        
         if(this.only_pawns){
             this.only_pawns = false;
             this.board.position(this.game.fen());
         } else{
-            this.boardService.getOnlyPawns(this.game.fen()).subscribe(
+            this.analysisService.getOnlyPawns(this.game.fen()).subscribe(
                 (response: any) => {
                     console.log('Only pawns fen: ' + response.content)
                     this.board.position(response.content);
@@ -161,8 +169,5 @@ export class ChessboardComponent implements OnInit {
               ); 
               this.only_pawns = true;
         }
-        
-
     }
-
 }
